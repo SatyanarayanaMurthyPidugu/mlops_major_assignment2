@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[codz]
+*$py.class
+
+# Environments
+.Python
+env/
+venv/
+*.egg-info/
+.env
+.envrc
+.venv
+
+
+# Model files
+*.pth
+*.joblib
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
