@@ -1,0 +1,47 @@
+# Deployment: Manages the state of your application pods, ensuring 3 replicas are running.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ # Name of the deployment
+ name: image-classifier-deployment
+ labels:
+   app: image-classifier
+spec:
+ # Run 3 replicas of the pod
+ replicas: 3
+ selector:
+   # This selector must match the labels in the pod template
+   matchLabels:
+     app: image-classifier
+ template:
+   metadata:
+     # Labels applied to each pod created by this template
+     labels:
+       app: image-classifier
+   spec:
+     containers:
+     - name: image-classifier-web
+       image: "SatyanarayanaMurthyPidugu/face-classifier-img:latest"
+      
+       # Pull policy: Always pull to get the latest image
+       # (Change to IfNotPresent for production to use cached images)
+       imagePullPolicy: Always
+      
+       ports:
+       - containerPort: 8000
+      
+       # Liveness and Readiness Probes (Optional but recommended)
+       # These help Kubernetes know if your app is healthy
+       livenessProbe:
+          httpGet:
+            path: /  # Check the root path
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+       readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---

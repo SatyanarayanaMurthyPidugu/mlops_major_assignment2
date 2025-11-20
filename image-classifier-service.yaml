@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-classifier-service
+spec:
+  selector:
+    app: image-classifier  # must match label in your deployment
+  ports:
+    - protocol: TCP
+      port: 8000        # Service port (external)
+      targetPort: 8000  # Pod port (containerPort)
+  type: NodePort        # Use NodePort for local access/testing
