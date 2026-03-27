@@ -3,7 +3,7 @@ name: Model CI Workflow
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   check_working_repo:
